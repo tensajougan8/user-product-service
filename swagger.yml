@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: Recently Viewed Products API
+  version: 1.0.0
+
+paths:
+  /api/v1/users/{userId}/recentlyViewed:
+    get:
+      summary: Get recently viewed products for a user
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+        401:
+          description: Unauthorized
+        500:
+          description: Internal Server Error
