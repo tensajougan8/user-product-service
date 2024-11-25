@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+
+  user:
+      build:
+        context: ./user-product-service
+      container_name: user-service
+      ports:
+        - "3000:3000"
+      environment:
+        REDIS_HOST: redis
+      networks:
+        - app-network
+
+volumes:
+  redis_data:
+
+networks:
+  app-network:
+    driver: bridge

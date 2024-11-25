@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: Node.js Firebase Application API
+  version: 1.0.0
+  description: API for managing user authentication and recently viewed products.
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                displayName:
+                  type: string
+      responses:
+        '200':
+          description: Successfully registered user.
+  /auth/login:
+    post:
+      summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successfully logged in.
+  /users/recentlyViewed:
+    get:
+      summary: Fetch recently viewed products
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successfully fetched products.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
